@@ -72,6 +72,20 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
 
 ---
 
+## 👩‍💻 Author
+
+Gouthami Nadupuri
+
+Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
+
+🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
+
+🔗 GitHub: https://github.com/GouthamiN25
+
+
+
+
+
 ## 📁 Project Structure
 
 ```text
@@ -82,11 +96,3 @@ CyberRisk-Advisor/
 └── requirements.txt    # Python dependencies
 
 
-## 👩‍💻 Author
-Gouthami Nadupuri
-
-Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
-
-🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
-
-🔗 GitHub: https://github.com/GouthamiN25
