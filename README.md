@@ -63,16 +63,6 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
 
 ---
 
-## 🏗️ Tech Stack
-
-- **Backend:** FastAPI (Python)
-- **Frontend:** HTML + CSS + vanilla JavaScript (single-page UI)
-- **LLM Provider:** AGI API (OpenAI-style interface)
-- **Infra:** Uvicorn (local dev), `.env` configuration
-
----
-
-
 ## 📁 Project Structure
 
 ```text
@@ -82,6 +72,16 @@ CyberRisk-Advisor/
 ├── main.py             # FastAPI backend + /analyze_logs endpoint
 └── requirements.txt    # Python dependencies
 
+
+
+---
+
+## 🏗️ Tech Stack
+
+- **Backend:** FastAPI (Python)
+- **Frontend:** HTML + CSS + vanilla JavaScript (single-page UI)
+- **LLM Provider:** AGI API (OpenAI-style interface)
+- **Infra:** Uvicorn (local dev), `.env` configuration
 
 ---
 
