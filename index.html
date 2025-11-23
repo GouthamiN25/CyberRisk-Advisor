@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CyberRisk Advisor – AI-Powered Security Operations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg-top: #8b2f44;      /* lighter burgundy */
+      --bg-mid: #461524;
+      --bg-bottom: #14060b;
+      --card-bg: rgba(12, 18, 28, 0.96);
+      --border-soft: rgba(148,163,184,0.35);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.1);
+      --text-main: #f9fafb;
+      --text-subtle: #9ca3af;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, var(--bg-top), var(--bg-mid) 42%, var(--bg-bottom) 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1180px;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    /* Top nav */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      margin-bottom: 2.2rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #fb7185, #7c2d4a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0b1120;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+    }
+
+    .logo-text-main {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .logo-text-sub {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-pill {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(250,250,250,0.38);
+      background: rgba(15,23,42,0.75);
+      color: #e5e7eb;
+    }
+
+    .nav-pill.highlight {
+      background: #fbbf24;
+      color: #1f2933;
+      border-color: transparent;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    /* Hero text */
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(56,189,248,0.3);
+      font-size: 0.72rem;
+      color: #e0f2fe;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56,189,248,0.9);
+    }
+
+    .hero-title {
+      margin-top: 1.1rem;
+      font-size: clamp(2.1rem, 2.8vw + 1.8rem, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      margin-top: 0.75rem;
+      font-size: 0.96rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--text-subtle);
+    }
+
+    /* Main panel */
+
+    .panel-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.3rem;
+    }
+
+    .panel {
+      width: 100%;
+      max-width: 780px;
+      background: var(--card-bg);
+      border-radius: 1.25rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+      padding: 1.4rem 1.6rem 1.5rem;
+    }
+
+    .panel-header-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .field-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .field-label-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 1px solid rgba(148,163,184,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: #e5e7eb;
+    }
+
+    .select-shell {
+      position: relative;
+    }
+
+    select {
+      width: 100%;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at top, #020617, #020617 55%, #020617);
+      color: #e5e7eb;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.86rem;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+
+    .select-caret {
+      position: absolute;
+      right: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* Logs input */
+
+    .logs-section {
+      margin-top: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .logs-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .logs-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .logs-link {
+      font-size: 0.75rem;
+      color: #7dd3fc;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      height: 220px;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at top, #020617, #020617 60%, #020617);
+      color: #e5e7eb;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.86rem;
+      resize: vertical;
+    }
+
+    textarea::placeholder {
+      color: #6b7280;
+    }
+
+    .char-count {
+      margin-top: 0.25rem;
+      font-size: 0.7rem;
+      color: #6b7280;
+      text-align: right;
+    }
+
+    /* Analyze button */
+
+    .btn-analyze-wrapper {
+      margin-top: 0.55rem;
+    }
+
+    .btn-analyze {
+      width: 100%;
+      border-radius: 999px;
+      border: none;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      color: #f9fafb;
+      opacity: 0.8;
+      transition: opacity 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+      box-shadow: 0 15px 35px rgba(15,23,42,0.85);
+    }
+
+    .btn-analyze:disabled {
+      cursor: default;
+      opacity: 0.45;
+      box-shadow: none;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #6b7280;
+    }
+
+    .btn-analyze:not(:disabled):hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .btn-analyze-icon {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 2px solid rgba(248,250,252,0.9);
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .btn-label-idle {
+      display: inline-block;
+    }
+
+    .btn-label-busy {
+      display: none;
+    }
+
+    .btn-analyze.loading .btn-label-idle {
+      display: none;
+    }
+
+    .btn-analyze.loading .btn-label-busy {
+      display: inline-block;
+    }
+
+    .btn-analyze.loading .btn-analyze-icon {
+      display: inline-block;
+    }
+
+    .btn-analyze .btn-analyze-icon {
+      display: none;
+    }
+
+    /* Results panel */
+
+    .results {
+      margin-top: 1.1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: radial-gradient(circle at top, #020617, #020617 50%, #020617);
+      padding: 1rem 1.1rem 1.1rem;
+      font-size: 0.86rem;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.7rem;
+    }
+
+    .results-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .results-score {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    .results-score span {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-left: 0.15rem;
+    }
+
+    .results-summary {
+      margin-bottom: 0.7rem;
+      color: #e5e7eb;
+    }
+
+    .results-columns {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
+      gap: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .results-section-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-bottom: 0.3rem;
+    }
+
+    .detection-item {
+      border-radius: 0.6rem;
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: 0.55rem 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .detection-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.1rem;
+    }
+
+    .detection-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .detection-severity {
+      font-size: 0.72rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.8);
+    }
+
+    .detection-desc {
+      font-size: 0.83rem;
+      color: #d1d5db;
+    }
+
+    .detection-indicators {
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.83rem;
+      color: #e5e7eb;
+    }
+
+    .bullet-list li {
+      margin-bottom: 0.2rem;
+    }
+
+    .queries code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      background: rgba(15,23,42,0.9);
+      padding: 0.25rem 0.4rem;
+      border-radius: 0.35rem;
+      border: 1px solid rgba(55,65,81,0.9);
+      display: inline-block;
+      margin-bottom: 0.25rem;
+    }
+
+    .results-empty {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .results-error {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #fecaca;
+    }
+
+    /* Footer */
+
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+    }
+
+    @media (max-width: 720px) {
+      .results-columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .panel {
+        padding: 1.2rem 1.1rem 1.3rem;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      .nav-right {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- Top navigation -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo-circle">C</div>
+        <div>
+          <div class="logo-text-main">CyberRisk Advisor</div>
+          <div class="logo-text-sub">AI-Powered Security Operations</div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-pill">Vertical Agent</div>
+        <div class="nav-pill highlight">The REAL Agent Challenge</div>
+      </div>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span>Powered by AGI Reasoning</span>
+      </div>
+      <h1 class="hero-title">AI-Powered Security Operations</h1>
+      <p class="hero-subtitle">
+        Ingest raw logs, detect advanced threats, and get instant incident response
+        plans. Your always-on autonomous SOC analyst.
+      </p>
+    </section>
+
+    <!-- Main interaction panel -->
+    <section class="panel-wrapper">
+      <div class="panel">
+        <!-- Top row: Environment / Concern -->
+        <div class="panel-header-row">
+          <div>
+            <div class="field-label">
+              <span class="field-label-icon">⛭</span>
+              <span>Environment Context</span>
+            </div>
+            <div class="select-shell">
+              <select id="env-select">
+                <option value="AWS Production" selected>AWS Production</option>
+                <option value="AWS Staging">AWS Staging</option>
+                <option value="GCP">GCP</option>
+                <option value="Azure">Azure</option>
+                <option value="Windows AD">Windows AD</option>
+                <option value="Kubernetes cluster">Kubernetes cluster</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="select-caret">▾</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="field-label">
+              <span class="field-label-icon">?</span>
+              <span>Specific Concern</span>
+            </div>
+            <div class="select-shell">
+              <select id="concern-select">
+                <option value="Do you see credential theft or crypto mining?" selected>
+                  Do you see credential theft or crypto mining?
+                </option>
+                <option value="Is there lateral movement or privilege escalation?">
+                  Is there lateral movement or privilege escalation?
+                </option>
+                <option value="Any signs of data exfiltration or large downloads?">
+                  Any signs of data exfiltration or large downloads?
+                </option>
+                <option value="Is this brute force or password spraying?">
+                  Is this brute force or password spraying?
+                </option>
+                <option value="General anomaly / suspicious activity review.">
+                  General anomaly / suspicious activity review.
+                </option>
+              </select>
+              <span class="select-caret">▾</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logs input -->
+        <div class="logs-section">
+          <div class="logs-row">
+            <div class="logs-label">
+              <span class="field-label-icon">{ }</span>
+              <span>Raw Logs Input</span>
+            </div>
+            <div class="logs-link" id="load-example">Load Suspicious Example</div>
+          </div>
+          <textarea
+            id="logs-textarea"
+            placeholder="Paste JSON logs, Syslog, or CloudTrail events here..."
+          ></textarea>
+          <div class="char-count" id="char-count">0 chars</div>
+        </div>
+
+        <!-- Analyze button -->
+        <div class="btn-analyze-wrapper">
+          <button class="btn-analyze" id="analyze-btn" disabled>
+            <span class="btn-analyze-icon"></span>
+            <span class="btn-label-idle">Analyze Logs</span>
+            <span class="btn-label-busy">Analyzing…</span>
+          </button>
+        </div>
+
+        <!-- Results panel -->
+        <div class="results" id="results">
+          <div class="results-header">
+            <div class="results-title">Analysis Result</div>
+            <div class="results-score" id="results-score">
+              -- <span>/ 100</span>
+            </div>
+          </div>
+          <div class="results-summary" id="results-summary">
+            Run an analysis to see the AI-generated risk summary and detections.
+          </div>
+
+          <div class="results-columns">
+            <div>
+              <div class="results-section-title">Detections</div>
+              <div id="results-detections" class="results-empty">
+                No detections yet.
+              </div>
+            </div>
+            <div>
+              <div class="results-section-title">Recommended Actions & Queries</div>
+              <div id="results-actions">
+                <p class="results-empty">Actions will appear here after analysis.</p>
+              </div>
+              <div class="results-section-title" style="margin-top:0.6rem;">Queries to Run</div>
+              <div id="results-queries" class="queries">
+                <p class="results-empty">Suggested SIEM queries will show up here.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-error" id="results-error" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      © CyberRisk Advisor • AI powered logs
+    </footer>
+  </main>
+
+  <script>
+    // ------- Elements -------
+    const textarea = document.getElementById("logs-textarea");
+    const charCount = document.getElementById("char-count");
+    const loadExample = document.getElementById("load-example");
+    const analyzeBtn = document.getElementById("analyze-btn");
+    const envSelect = document.getElementById("env-select");
+    const concernSelect = document.getElementById("concern-select");
+
+    const resultsScore = document.getElementById("results-score");
+    const resultsSummary = document.getElementById("results-summary");
+    const resultsDetections = document.getElementById("results-detections");
+    const resultsActions = document.getElementById("results-actions");
+    const resultsQueries = document.getElementById("results-queries");
+    const resultsError = document.getElementById("results-error");
+
+    // ------- Character counter + button enable -------
+    function updateCharCount() {
+      const len = textarea.value.length;
+      charCount.textContent = len + (len === 1 ? " char" : " chars");
+      analyzeBtn.disabled = len === 0;
+    }
+
+    textarea.addEventListener("input", updateCharCount);
+
+    // ------- Load suspicious example -------
+    const suspiciousExample = `{
+  "eventSource": "signin.amazonaws.com",
+  "eventName": "ConsoleLogin",
+  "userIdentity": {
+    "type": "IAMUser",
+    "userName": "alice@example.com"
+  },
+  "sourceIPAddress": "203.0.113.42",
+  "additionalEventData": {
+    "MFAUsed": "No"
+  },
+  "responseElements": {
+    "ConsoleLogin": "Failure"
+  }
+}
+{
+  "eventSource": "ec2.amazonaws.com",
+  "eventName": "StartInstances",
+  "userIdentity": {
+    "type": "IAMUser",
+    "userName": "alice@example.com"
+  },
+  "sourceIPAddress": "203.0.113.42",
+  "requestParameters": {
+    "instanceId": "i-0abcd1234ef567890"
+  }
+}`;
+
+    loadExample.addEventListener("click", () => {
+      textarea.value = suspiciousExample;
+      updateCharCount();
+    });
+
+    // ------- Helper to render results -------
+    function renderResults(data) {
+      resultsError.style.display = "none";
+      resultsError.textContent = "";
+
+      // Score
+      const score = typeof data.overall_risk_score === "number"
+        ? data.overall_risk_score
+        : 0;
+      resultsScore.innerHTML = `${score.toFixed(1)} <span>/ 100</span>`;
+
+      // Summary
+      resultsSummary.textContent = data.summary || "No summary returned.";
+
+      // Detections
+      const detections = Array.isArray(data.detections) ? data.detections : [];
+      if (detections.length === 0) {
+        resultsDetections.className = "results-empty";
+        resultsDetections.textContent = "No detections returned.";
+      } else {
+        resultsDetections.className = "";
+        resultsDetections.innerHTML = "";
+        detections.forEach((d) => {
+          const item = document.createElement("div");
+          item.className = "detection-item";
+
+          const titleRow = document.createElement("div");
+          titleRow.className = "detection-title-row";
+
+          const title = document.createElement("div");
+          title.className = "detection-title";
+          title.textContent = d.title || "Detection";
+
+          const sev = document.createElement("div");
+          sev.className = "detection-severity";
+          sev.textContent = d.severity || "Medium";
+
+          titleRow.appendChild(title);
+          titleRow.appendChild(sev);
+
+          const desc = document.createElement("div");
+          desc.className = "detection-desc";
+          desc.textContent = d.description || "";
+
+          item.appendChild(titleRow);
+          item.appendChild(desc);
+
+          if (Array.isArray(d.indicators) && d.indicators.length > 0) {
+            const ind = document.createElement("div");
+            ind.className = "detection-indicators";
+            ind.textContent = "Indicators: " + d.indicators.join(", ");
+            item.appendChild(ind);
+          }
+
+          resultsDetections.appendChild(item);
+        });
+      }
+
+      // Recommended actions
+      const actions = Array.isArray(data.recommended_actions)
+        ? data.recommended_actions
+        : [];
+      if (actions.length === 0) {
+        resultsActions.innerHTML =
+          '<p class="results-empty">No recommended actions returned.</p>';
+      } else {
+        const ul = document.createElement("ul");
+        ul.className = "bullet-list";
+        actions.forEach((a) => {
+          const li = document.createElement("li");
+          li.textContent = a;
+          ul.appendChild(li);
+        });
+        resultsActions.innerHTML = "";
+        resultsActions.appendChild(ul);
+      }
+
+      // Queries
+      const queries = Array.isArray(data.queries_to_run)
+        ? data.queries_to_run
+        : [];
+      if (queries.length === 0) {
+        resultsQueries.innerHTML =
+          '<p class="results-empty">No queries returned.</p>';
+      } else {
+        resultsQueries.innerHTML = "";
+        queries.forEach((q) => {
+          const block = document.createElement("div");
+          const code = document.createElement("code");
+          code.textContent = q;
+          block.appendChild(code);
+          resultsQueries.appendChild(block);
+        });
+      }
+    }
+
+    function showError(message) {
+      resultsError.style.display = "block";
+      resultsError.textContent = message;
+    }
+
+    // ------- Analyze button: call FastAPI backend -------
+    analyzeBtn.addEventListener("click", async () => {
+      if (analyzeBtn.disabled) return;
+
+      analyzeBtn.classList.add("loading");
+      analyzeBtn.disabled = true;
+      showError("");
+
+      try {
+        const payload = {
+          logs: textarea.value,
+          environment: envSelect.value,
+          question: concernSelect.value,
+        };
+
+        // Same-origin call to FastAPI backend
+        const resp = await fetch("/analyze_logs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!resp.ok) {
+          const text = await resp.text();
+          throw new Error(`Backend error (${resp.status}): ${text}`);
+        }
+
+        const data = await resp.json();
+        renderResults(data);
+      } catch (err) {
+        console.error(err);
+        showError(err.message || "Failed to analyze logs.");
+      } finally {
+        analyzeBtn.classList.remove("loading");
+        analyzeBtn.disabled = textarea.value.length === 0;
+      }
+    });
+
+    // Init on load
+    updateCharCount();
+  </script>
+</body>
+</html>
