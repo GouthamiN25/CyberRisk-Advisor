@@ -72,19 +72,6 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
 
 ---
 
-## 👩‍💻 Author
-
-Gouthami Nadupuri
-
-Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
-
-🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
-
-🔗 GitHub: https://github.com/GouthamiN25
-
-
-
-
 
 ## 📁 Project Structure
 
@@ -94,5 +81,18 @@ CyberRisk-Advisor/
 ├── index.html          # Front-end UI (log console + results panel)
 ├── main.py             # FastAPI backend + /analyze_logs endpoint
 └── requirements.txt    # Python dependencies
+
+
+---
+
+## 👩‍💻 Author
+
+Gouthami Nadupuri
+
+Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
+
+🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
+
+🔗 GitHub: https://github.com/GouthamiN25
 
 
