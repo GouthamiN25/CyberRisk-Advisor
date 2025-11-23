@@ -81,3 +81,12 @@ CyberRisk-Advisor/
 ├── main.py             # FastAPI backend + /analyze_logs endpoint
 └── requirements.txt    # Python dependencies
 
+
+## 👩‍💻 Author
+Gouthami Nadupuri
+
+Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
+
+🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
+
+🔗 GitHub: https://github.com/GouthamiN25
