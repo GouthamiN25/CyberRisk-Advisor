@@ -63,6 +63,15 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
 
 ---
 
+## 🏗️ Tech Stack
+
+- **Backend:** FastAPI (Python)
+- **Frontend:** HTML + CSS + vanilla JavaScript (single-page UI)
+- **LLM Provider:** AGI API (OpenAI-style interface)
+- **Infra:** Uvicorn (local dev), `.env` configuration
+
+----
+
 ## 📁 Project Structure
 
 ```text
@@ -71,29 +80,4 @@ CyberRisk-Advisor/
 ├── index.html          # Front-end UI (log console + results panel)
 ├── main.py             # FastAPI backend + /analyze_logs endpoint
 └── requirements.txt    # Python dependencies
-
-
-
----
-
-## 🏗️ Tech Stack
-
-- **Backend:** FastAPI (Python)
-- **Frontend:** HTML + CSS + vanilla JavaScript (single-page UI)
-- **LLM Provider:** AGI API (OpenAI-style interface)
-- **Infra:** Uvicorn (local dev), `.env` configuration
-
----
-
-
-## 👩‍💻 Author
-
-Gouthami Nadupuri
-
-Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
-
-🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
-
-🔗 GitHub: https://github.com/GouthamiN25
-
 
