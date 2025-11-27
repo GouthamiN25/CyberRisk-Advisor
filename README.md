@@ -60,7 +60,6 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
      - Cards for each detection (title, severity, indicators)
      - Bullet list of recommended actions
      - Code-style blocks for SIEM queries
-
 ---
 
 ## 🏗️ Tech Stack
@@ -71,13 +70,55 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
 - **Infra:** Uvicorn (local dev), `.env` configuration
 
 ----
+## ⚠️ Disclaimer
+This project is for education and hackathon demonstration only. Not financial advice.
 
-## 📁 Project Structure
+---
 
-```text
-CyberRisk-Advisor/
-├── AGI-1.mov           # Demo video (local run / proof of concept)
-├── index.html          # Front-end UI (log console + results panel)
-├── main.py             # FastAPI backend + /analyze_logs endpoint
-└── requirements.txt    # Python dependencies
+---
+
+## 📜 License
+
+![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)
+
+### © 2025 Gouthami Nadupuri  
+**All Rights Reserved.**
+
+This project, its source code, architecture, documentation, and assets are the exclusive intellectual property of **Gouthami Nadupuri**.
+
+You **may NOT** copy, reproduce, modify, clone, redistribute, or reuse any part of this repository without explicit written permission.
+
+Unauthorized usage constitutes copyright infringement.
+
+---
+
+## ⚠️ Disclaimer
+
+This project is intended **solely for educational, research, and hackathon demonstration purposes**.  
+It does **not** provide financial advice, security guarantees, or production-grade fraud assessment.
+
+Any insights or outputs generated should not be used for real-world financial decision-making or business operations.  
+The author assumes **no liability** for misuse, misinterpretation, or unauthorized use of the project.
+
+---
+
+## 🛡️ DMCA Protection Notice
+
+This repository is protected under the **Digital Millennium Copyright Act (DMCA)**.  
+Unauthorized copying, hosting, or distribution may result in takedown actions or legal claims.
+
+If you discover unauthorized copies of this project, you may initiate a DMCA request.
+
+---
+
+## ⚠️ GitHub Legal Disclaimer
+
+By accessing this repository, you agree:
+
+- The content is provided **for viewing only**  
+- You may not download, fork, copy, modify, or upload the code elsewhere  
+- GitHub’s terms do **not** override the “All Rights Reserved” protection  
+- Violations will be treated as intellectual property theft  
+
+---
 
