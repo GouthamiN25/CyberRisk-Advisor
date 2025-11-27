@@ -70,12 +70,6 @@ All of this is returned as structured JSON so it can plug into dashboards or oth
 - **Infra:** Uvicorn (local dev), `.env` configuration
 
 ----
-## ⚠️ Disclaimer
-This project is for education and hackathon demonstration only. Not financial advice.
-
----
-
----
 
 ## 📜 License
 
@@ -99,6 +93,17 @@ It does **not** provide financial advice, security guarantees, or production-gra
 
 Any insights or outputs generated should not be used for real-world financial decision-making or business operations.  
 The author assumes **no liability** for misuse, misinterpretation, or unauthorized use of the project.
+
+---
+
+## 👩‍💻 Author
+Gouthami Nadupuri
+
+Data Scientist | AI Engineer | Creator of CurioGalaxy 💫
+
+🔗 LinkedIn: https://www.linkedin.com/in/gouthami-nadupuri
+
+🔗 GitHub: https://github.com/GouthamiN25
 
 ---
 
