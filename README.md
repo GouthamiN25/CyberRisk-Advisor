@@ -102,23 +102,4 @@ The author assumes **no liability** for misuse, misinterpretation, or unauthoriz
 
 ---
 
-## 🛡️ DMCA Protection Notice
-
-This repository is protected under the **Digital Millennium Copyright Act (DMCA)**.  
-Unauthorized copying, hosting, or distribution may result in takedown actions or legal claims.
-
-If you discover unauthorized copies of this project, you may initiate a DMCA request.
-
----
-
-## ⚠️ GitHub Legal Disclaimer
-
-By accessing this repository, you agree:
-
-- The content is provided **for viewing only**  
-- You may not download, fork, copy, modify, or upload the code elsewhere  
-- GitHub’s terms do **not** override the “All Rights Reserved” protection  
-- Violations will be treated as intellectual property theft  
-
----
 
